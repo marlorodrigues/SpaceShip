@@ -1,10 +1,35 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://sprites/playerShip1_blue.png" type="Texture" id=1]
 [ext_resource path="res://scripts/spaceship.gd" type="Script" id=2]
+[ext_resource path="res://sprites/Parts/gun09.png" type="Texture" id=3]
+[ext_resource path="res://sprites/Parts/gun10.png" type="Texture" id=4]
 
 [node name="spaceship" type="Node2D"]
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="body" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
+
+[node name="LeftCannon" type="Sprite" parent="body"]
+position = Vector2( -30, 8 )
+texture = ExtResource( 3 )
+flip_v = true
+
+[node name="LeftPosition" type="Position2D" parent="body/LeftCannon"]
+position = Vector2( 3, -26 )
+z_as_relative = false
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="RightCannon" type="Sprite" parent="body"]
+position = Vector2( 30, 8 )
+texture = ExtResource( 4 )
+flip_v = true
+
+[node name="RightPosition" type="Position2D" parent="body/RightCannon"]
+position = Vector2( -3, -26 )

@@ -43,20 +43,30 @@ func _process(delta):
 		down = 0
 	
 	#Control Y position
-	set_position(get_position() + Vector2(0, speed) * delta * (up + down))
+	set_position(get_position() + Vector2(0, 1) * speed * delta * (up + down))
 	
 	#Control X position
-	set_position(get_position() + Vector2(speed, 0) * delta * (left + right))
+	set_position(get_position() + Vector2(1, 0) * speed * delta * (left + right))
 	
 	if Input.is_action_pressed("ui_shot"):
 		if last_shot <= 0: 
-			var shot = shot_model.instance()
-			shot.set_position(get_position())
-			get_node("../").add_child(shot)
 			last_shot += intervel_between_shots
+			var shotLeft = shot_model.instance()
+			var shotRight = shot_model.instance()
+			var positionShotY = get_position().y + get_node("LeftCannon/LeftPosition").get_position().y
+			var positionShotX = get_position().x + get_node("LeftCannon/LeftPosition").get_position().x
+			
+			shotLeft.set_position(Vector2(positionShotX - 30, positionShotY))
+			
+			positionShotY = get_position().y + get_node("RightCannon/RightPosition").get_position().y
+			positionShotX = get_position().x + get_node("RightCannon/RightPosition").get_position().x
+			
+			shotRight.set_position(Vector2(positionShotX + 30, positionShotY))
+			
+			get_node("../").add_child(shotLeft)
+			get_node("../").add_child(shotRight)
 			
 	if last_shot > 0:
 		last_shot -= delta
 	
-	print(delta)
 	pass
